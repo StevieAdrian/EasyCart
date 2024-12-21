@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import CreateProduct from './pages/product'
+import CreateProduct from './pages/create-product'
 
 const router = createBrowserRouter([
   {
