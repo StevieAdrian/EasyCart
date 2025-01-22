@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import addImg from "../../../assets/add-image.png";
-import addVid from "../../../assets/add-video.png";
+import addImg from "../../assets/add-image.png";
+import addVid from "../../assets/add-video.png";
 interface imageProp {
     children: React.ReactNode;
     type: "image" | "video";
