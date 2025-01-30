@@ -14,7 +14,7 @@ const router = createBrowserRouter([
     path: "/create",
     element: <CreateProduct />
   }
-
+  
 ])
 
 createRoot(document.getElementById('root')!).render(
