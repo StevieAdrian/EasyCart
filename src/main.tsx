@@ -7,7 +7,7 @@ import CreateProduct from './pages/create-product'
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello World</div>,
+    element: <div className='tes'>Hello World</div>,
     // errorElement: <ErrorPage />
   },
   {
