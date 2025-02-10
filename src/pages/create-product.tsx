@@ -4,13 +4,17 @@ import FileInput from "../components/elements/input/FileInput";
 import ProductCondition from "../components/elements/input/ProductCondition";
 import { useState } from "react";
 import Button from "../components/elements/buttons/Button";
+import useProductForm from "../hooks/useProductForm";
 
 
 const CreateProduct = () => {
-    const [selectedCondition, setSelectedCondition] = useState<"Baru" | "Bekas">("Baru");
-    
+    // const { setValue, selectedConditions };
+    // const [selectedCondition, setSelectedCondition] = useState<"Baru" | "Bekas">("Baru");
+    // const [localSelectedCondition, setLocalSelectedCondition] = useState<"Baru" | "Bekas">("Baru");
+    const { formData, handleInputChange, handleFormSubmit, selectedCondition, setSelectedCondition } = useProductForm();
+
     return (
-        <form action="">
+        <form onSubmit={handleFormSubmit} action="">
             <div className="pl-20 pt-16">
                 <div>
                     <h1 className="font-extrabold text-lg">Upload Produk</h1>
@@ -21,7 +25,7 @@ const CreateProduct = () => {
                     <ProductDescription title="Nama Produk">Nama produk yang ingin Anda tampilkan.</ProductDescription>
                 
                     <div className="flex flex-1 pl-12 ml-6 items-center mt-4">
-                        <ProductInput variant={"name"} placeholder="Masukkan nama produk di sini"></ProductInput>
+                        <ProductInput value={formData.name} onChange={handleInputChange} name={"name"} variant={"name"} placeholder="Masukkan nama produk di sini"></ProductInput>
                     </div>
                 </div>
 
@@ -36,12 +40,13 @@ const CreateProduct = () => {
                         <FileInput type="image">Foto 5</FileInput>
                     </div>
                 </div>
-                <br />
+                <br /> 
 
+                
                 <div className="flex space-x-6">
                     <ProductDescription title="Video Produk">Unggah video produk dalam format MP4 dengan durasi maksimal 60 detik untuk memberikan gambaran yang jelas dan menarik bagi pelanggan.</ProductDescription>
                     
-                    {/* will be added soon */}
+                    {/* will be added soon */ }
                     <div className="flex justify-center items-center pl-12">
                         <FileInput type="video">Video</FileInput>
                     </div>
@@ -50,8 +55,8 @@ const CreateProduct = () => {
                 <div className="pt-10 flex space-x-6">
                     <ProductDescription title="Kondisi">Pilih salah satu kondisi produk: Baru atau Bekas, sesuai dengan keadaan barang yang Anda tawarkan.</ProductDescription>
                     <div className="flex justify-center items-center pl-12">
-                        <ProductCondition value="Baru" selectedCondition={selectedCondition} onChange={setSelectedCondition}></ProductCondition>
-                        <ProductCondition value="Bekas" selectedCondition={selectedCondition} onChange={setSelectedCondition}></ProductCondition>                
+                        <ProductCondition value="Baru" isSelected={selectedCondition === "Baru"} onChange={() => setSelectedCondition("Baru")}  />
+                        <ProductCondition value="Bekas" isSelected={selectedCondition === "Bekas"} onChange={() => setSelectedCondition("Bekas")}  />
                     </div>
                 </div>
 
@@ -60,7 +65,7 @@ const CreateProduct = () => {
 
                     <div className="pl-12 ml-6 flex flex-col flex-1">
                         <div className="mt-4">
-                            <ProductInput variant={"description"} placeholder="Masukkan deskripsi produk di sini..."></ProductInput>
+                            <ProductInput value={formData.description} onChange={handleInputChange} name={"description"} variant={"description"} placeholder="Masukkan deskripsi produk di sini..."></ProductInput>
                         </div>
                     </div>
                 </div>
@@ -69,14 +74,14 @@ const CreateProduct = () => {
                     <ProductDescription title="Kategori Produk">Masukkan kategori produk Anda agar memudahkan pembeli menemukan barang sesuai kebutuhan.</ProductDescription>
 
                     <div className="pl-12 ml-6 flex flex-col justify-center mt-8">
-                        <ProductInput variant={"category"} placeholder="Masukkan Berat Produk"></ProductInput>
+                        <ProductInput value={formData.category} onChange={handleInputChange} name={"category"} variant={"category"} placeholder="Masukkan Berat Produk"></ProductInput>
                     </div>
                 </div>
 
                 <div className="mt-12 flex">
                     <ProductDescription title="Varian">Pilih varian sesuai dengan pilihan ukuran, warna atau jenis lainnya yang tersedia.</ProductDescription>
                     <div className="pl-12 ml-6 flex items-center mt-2">
-                        <Button color={"bg-electricBlue text-white"}>+ Aktifkan Variasi</Button>
+                        <Button type="" color={"bg-electricBlue text-white"}>+ Aktifkan Variasi</Button>
                     </div>
                 </div> 
 
@@ -84,10 +89,10 @@ const CreateProduct = () => {
                 <h1 className="font-bold mt-24 text-lg">Harga</h1>
 
                 <div className="mt-12 flex">
-                    <ProductDescription  title="Minimal Pembelian">Jumlah produk yang harus dibeli sebagai syarat pemesanan.</ProductDescription>
+                    <ProductDescription title="Minimal Pembelian">Jumlah produk yang harus dibeli sebagai syarat pemesanan.</ProductDescription>
                     
                     <div className="flex flex-1 pl-12 ml-6 items-center mt-2">
-                        <ProductInput variant={"minimumPurchase"} placeholder=""></ProductInput>
+                        <ProductInput value={formData.min_purchase} onChange={handleInputChange} name={"min_purchase"}variant={"min_purchase"} placeholder=""></ProductInput>
                     </div>
                 </div> 
 
@@ -95,7 +100,7 @@ const CreateProduct = () => {
                     <ProductDescription title="Harga Satuan Produk">Biaya untuk satu unit produk ini.</ProductDescription>
                     
                     <div className="flex flex-1 pl-12 ml-6 items-center mt-2">
-                        <ProductInput variant={"unitPrice"} placeholder="Masukkan Harga Produk"></ProductInput>
+                        <ProductInput value={formData.price} onChange={handleInputChange} name={"price"} variant={"unitPrice"} placeholder="Masukkan Harga Produk"></ProductInput>
                     </div>
                 </div> 
 
@@ -106,11 +111,11 @@ const CreateProduct = () => {
                     <ProductDescription title="Berat Produk">Biaya untuk satu unit produk ini.</ProductDescription>
                 
                     <div className="flex pl-12 ml-6 items-center mt-2">
-                        <ProductInput variant={"weightShipping"} placeholder="Masukkan Berat Produk"></ProductInput>
+                        <ProductInput value={formData.weight} onChange={handleInputChange} name={"weight"} variant={"weightShipping"} placeholder="Masukkan Berat Produk"></ProductInput>
                     </div>
                 </div>
                 
-                <div className="mt-6 flex">
+                {/* <div className="mt-6 flex">
                     <ProductDescription title="Ukuran">Biaya untuk satu unit produk ini.</ProductDescription>
                 
                     <div className="flex pl-12 ml-6 items-center mt-2">
@@ -119,15 +124,18 @@ const CreateProduct = () => {
                         <ProductInput variant={"size"} placeholder="Tinggi"></ProductInput>
                     </div>
                 </div>
-            
+             */}
                 
                 <div className="mt-48 mr-12">
                     <div style={{borderColor: 'D9D9D9'}} className="flex justify-end p-5 pr-0 border-t-2 w-full">
                         <div className="mt-4 flex">
                             <div className="mr-10">
-                                <Button color={"bg-white text-black border border-black"}>Batal</Button>
+                                <Button type="" color={"bg-white text-black border border-black"}>Batal</Button>
                             </div>
-                            <Button color={"bg-electricBlue text-white"}>Simpan</Button>
+                            {/* <button type="submit">
+                                Simpan 
+                            </button> */}
+                                <Button type="submit" color={"bg-electricBlue text-white"}>Simpan</Button>
                         </div>
                     </div>
                 </div>

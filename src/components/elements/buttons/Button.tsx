@@ -1,6 +1,7 @@
 interface ButtonProps {
     color: string;
     children: React.ReactNode;
+    type: "submit" | "";
 }
 
 const Button = (props: ButtonProps) => {
