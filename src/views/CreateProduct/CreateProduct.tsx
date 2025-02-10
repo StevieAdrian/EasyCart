@@ -1,10 +1,9 @@
-import ProductInput from "../components/elements/input/ProductInput";
-import ProductDescription from "../components/elements/details/ProductDescription";
-import FileInput from "../components/elements/input/FileInput";
-import ProductCondition from "../components/elements/input/ProductCondition";
-import { useState } from "react";
-import Button from "../components/elements/buttons/Button";
-import useProductForm from "../hooks/useProductForm";
+import ProductInput from "../../components/input/ProductInput"
+import ProductDescription from "../../components/details/ProductDescription";
+import FileInput from "../../components/input/FileInput";
+import ProductCondition from "../../components/input/ProductCondition";
+import Button from "../../components/buttons/Button";
+import useProductForm from "../../hooks/useProductForm";
 
 
 const CreateProduct = () => {
