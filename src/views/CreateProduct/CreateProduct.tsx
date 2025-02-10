@@ -7,9 +7,6 @@ import useProductForm from "../../hooks/useProductForm";
 
 
 const CreateProduct = () => {
-    // const { setValue, selectedConditions };
-    // const [selectedCondition, setSelectedCondition] = useState<"Baru" | "Bekas">("Baru");
-    // const [localSelectedCondition, setLocalSelectedCondition] = useState<"Baru" | "Bekas">("Baru");
     const { formData, handleInputChange, handleFormSubmit, selectedCondition, setSelectedCondition } = useProductForm();
 
     return (
